@@ -34,16 +34,21 @@ jobs:
           $probe = Get-ChildItem -Path ffmpeg_extracted -Recurse -Filter "ffprobe.exe" | Select-Object -First 1
           Copy-Item $probe.FullName -Destination .
 
-      - name: PyInstaller ile tek dosya exe oluştur
+      - name: PyInstaller ile klasör bazlı (onedir) uygulama oluştur
+        # --onefile YERİNE onedir kullanılıyor: onefile modu ffmpeg.exe'yi her
+        # açılışta %TEMP%'e yeniden çıkarır; kısıtlı/korumalı Windows
+        # makinelerinde antivirüs bu geçici dosyayı engelleyip garip ffmpeg
+        # hatalarına (ör. "error code 4294967158") yol açabiliyor. onedir'de
+        # ffmpeg.exe program klasöründe sabit bir dosya olarak kalır.
         run: >
-          pyinstaller --onefile --windowed
+          pyinstaller --windowed
           --name "YouTube_Indirici"
           --add-binary "ffmpeg.exe;."
           --add-binary "ffprobe.exe;."
           youtube_indirici.py
 
-      - name: exe'yi artifact olarak yükle
+      - name: Programı artifact olarak yükle
         uses: actions/upload-artifact@v4
         with:
           name: YouTube_Indirici-windows
-          path: dist/YouTube_Indirici.exe
+          path: dist/YouTube_Indirici/
