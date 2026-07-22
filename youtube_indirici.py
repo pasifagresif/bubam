@@ -131,16 +131,18 @@ def start_download_thread():
 
     # Zaman girdilerini oku ve doğrula
     try:
+        start_hour = int(start_hour_entry.get().strip() or 0)
         start_min = int(start_min_entry.get().strip() or 0)
         start_sec = int(start_sec_entry.get().strip() or 0)
+        end_hour = int(end_hour_entry.get().strip() or 0)
         end_min = int(end_min_entry.get().strip() or 0)
         end_sec = int(end_sec_entry.get().strip() or 0)
     except ValueError:
-        messagebox.showerror("Hata", "Dakika ve saniye alanlarına sadece sayı girmelisiniz!")
+        messagebox.showerror("Hata", "Saat, dakika ve saniye alanlarına sadece sayı girmelisiniz!")
         return
 
-    start_total_sec = start_min * 60 + start_sec
-    end_total_sec = end_min * 60 + end_sec
+    start_total_sec = start_hour * 3600 + start_min * 60 + start_sec
+    end_total_sec = end_hour * 3600 + end_min * 60 + end_sec
 
     if end_total_sec > 0 and end_total_sec <= start_total_sec:
         messagebox.showerror("Hata", "Bitiş zamanı, başlangıç zamanından sonra olmalıdır!")
@@ -344,42 +346,43 @@ start_lf = tk.LabelFrame(
     pady=10
 )
 start_lf.grid(row=0, column=0, padx=(0, 10), sticky="nsew")
+start_lf.columnconfigure(0, weight=1)
+start_lf.columnconfigure(1, weight=1)
+start_lf.columnconfigure(2, weight=1)
 
-start_min_label = tk.Label(start_lf, text="Dakika:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
-start_min_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-start_min_entry = tk.Entry(
-    start_lf,
-    font=("Helvetica", 20, "bold"),
-    bg="#24283B",
-    fg="#C0CAF5",
-    bd=0,
-    highlightthickness=1,
-    highlightbackground="#383E56",
-    highlightcolor="#9ECE6A",
-    insertbackground="white",
-    width=4,
-    justify="center"
-)
+start_hour_label = tk.Label(start_lf, text="Saat", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+start_hour_label.grid(row=0, column=0, padx=5, pady=(0, 3))
+start_min_label = tk.Label(start_lf, text="Dakika", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+start_min_label.grid(row=0, column=1, padx=5, pady=(0, 3))
+start_sec_label = tk.Label(start_lf, text="Saniye", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+start_sec_label.grid(row=0, column=2, padx=5, pady=(0, 3))
+
+def _make_time_entry(parent, highlight_color):
+    return tk.Entry(
+        parent,
+        font=("Helvetica", 20, "bold"),
+        bg="#24283B",
+        fg="#C0CAF5",
+        bd=0,
+        highlightthickness=1,
+        highlightbackground="#383E56",
+        highlightcolor=highlight_color,
+        insertbackground="white",
+        width=4,
+        justify="center"
+    )
+
+start_hour_entry = _make_time_entry(start_lf, "#9ECE6A")
+start_hour_entry.insert(0, "0")
+start_hour_entry.grid(row=1, column=0, padx=5, pady=5, ipady=6)
+
+start_min_entry = _make_time_entry(start_lf, "#9ECE6A")
 start_min_entry.insert(0, "0")
-start_min_entry.grid(row=0, column=1, padx=5, pady=5, ipady=6)
+start_min_entry.grid(row=1, column=1, padx=5, pady=5, ipady=6)
 
-start_sec_label = tk.Label(start_lf, text="Saniye:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
-start_sec_label.grid(row=0, column=2, padx=5, pady=5, sticky="w")
-start_sec_entry = tk.Entry(
-    start_lf,
-    font=("Helvetica", 20, "bold"),
-    bg="#24283B",
-    fg="#C0CAF5",
-    bd=0,
-    highlightthickness=1,
-    highlightbackground="#383E56",
-    highlightcolor="#9ECE6A",
-    insertbackground="white",
-    width=4,
-    justify="center"
-)
+start_sec_entry = _make_time_entry(start_lf, "#9ECE6A")
 start_sec_entry.insert(0, "0")
-start_sec_entry.grid(row=0, column=3, padx=5, pady=5, ipady=6)
+start_sec_entry.grid(row=1, column=2, padx=5, pady=5, ipady=6)
 
 # Bitiş Zamanı Kutusu
 end_lf = tk.LabelFrame(
@@ -394,42 +397,28 @@ end_lf = tk.LabelFrame(
     pady=10
 )
 end_lf.grid(row=0, column=1, padx=(10, 0), sticky="nsew")
+end_lf.columnconfigure(0, weight=1)
+end_lf.columnconfigure(1, weight=1)
+end_lf.columnconfigure(2, weight=1)
 
-end_min_label = tk.Label(end_lf, text="Dakika:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
-end_min_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-end_min_entry = tk.Entry(
-    end_lf,
-    font=("Helvetica", 20, "bold"),
-    bg="#24283B",
-    fg="#C0CAF5",
-    bd=0,
-    highlightthickness=1,
-    highlightbackground="#383E56",
-    highlightcolor="#F7768E",
-    insertbackground="white",
-    width=4,
-    justify="center"
-)
+end_hour_label = tk.Label(end_lf, text="Saat", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+end_hour_label.grid(row=0, column=0, padx=5, pady=(0, 3))
+end_min_label = tk.Label(end_lf, text="Dakika", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+end_min_label.grid(row=0, column=1, padx=5, pady=(0, 3))
+end_sec_label = tk.Label(end_lf, text="Saniye", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
+end_sec_label.grid(row=0, column=2, padx=5, pady=(0, 3))
+
+end_hour_entry = _make_time_entry(end_lf, "#F7768E")
+end_hour_entry.insert(0, "0")
+end_hour_entry.grid(row=1, column=0, padx=5, pady=5, ipady=6)
+
+end_min_entry = _make_time_entry(end_lf, "#F7768E")
 end_min_entry.insert(0, "0")
-end_min_entry.grid(row=0, column=1, padx=5, pady=5, ipady=6)
+end_min_entry.grid(row=1, column=1, padx=5, pady=5, ipady=6)
 
-end_sec_label = tk.Label(end_lf, text="Saniye:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
-end_sec_label.grid(row=0, column=2, padx=5, pady=5, sticky="w")
-end_sec_entry = tk.Entry(
-    end_lf,
-    font=("Helvetica", 20, "bold"),
-    bg="#24283B",
-    fg="#C0CAF5",
-    bd=0,
-    highlightthickness=1,
-    highlightbackground="#383E56",
-    highlightcolor="#F7768E",
-    insertbackground="white",
-    width=4,
-    justify="center"
-)
+end_sec_entry = _make_time_entry(end_lf, "#F7768E")
 end_sec_entry.insert(0, "0")
-end_sec_entry.grid(row=0, column=3, padx=5, pady=5, ipady=6)
+end_sec_entry.grid(row=1, column=2, padx=5, pady=5, ipady=6)
 
 # Bilgilendirme İpucu
 info_label = tk.Label(
