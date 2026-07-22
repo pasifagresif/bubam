@@ -233,7 +233,7 @@ def on_closing():
 # GUI Arayüz Tasarımı (Tokyo Night Dark Theme)
 root = tk.Tk()
 root.title("YouTube Kolay Video İndirici & Kesici")
-root.geometry("680x640")
+root.geometry("680x660")
 root.configure(bg="#1A1B26")
 root.resizable(True, True)
 root.protocol("WM_DELETE_WINDOW", on_closing)
@@ -306,41 +306,41 @@ start_lf = tk.LabelFrame(
 )
 start_lf.grid(row=0, column=0, padx=(0, 10), sticky="nsew")
 
-start_min_label = tk.Label(start_lf, text="Dakika:", font=("Helvetica", 10), bg="#1A1B26", fg="#A9B1D6")
+start_min_label = tk.Label(start_lf, text="Dakika:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
 start_min_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 start_min_entry = tk.Entry(
-    start_lf, 
-    font=("Helvetica", 11, "bold"), 
-    bg="#24283B", 
-    fg="#C0CAF5", 
-    bd=0, 
-    highlightthickness=1, 
-    highlightbackground="#383E56", 
-    highlightcolor="#9ECE6A", 
-    insertbackground="white", 
-    width=6, 
+    start_lf,
+    font=("Helvetica", 20, "bold"),
+    bg="#24283B",
+    fg="#C0CAF5",
+    bd=0,
+    highlightthickness=1,
+    highlightbackground="#383E56",
+    highlightcolor="#9ECE6A",
+    insertbackground="white",
+    width=4,
     justify="center"
 )
 start_min_entry.insert(0, "0")
-start_min_entry.grid(row=0, column=1, padx=5, pady=5)
+start_min_entry.grid(row=0, column=1, padx=5, pady=5, ipady=6)
 
-start_sec_label = tk.Label(start_lf, text="Saniye:", font=("Helvetica", 10), bg="#1A1B26", fg="#A9B1D6")
+start_sec_label = tk.Label(start_lf, text="Saniye:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
 start_sec_label.grid(row=0, column=2, padx=5, pady=5, sticky="w")
 start_sec_entry = tk.Entry(
-    start_lf, 
-    font=("Helvetica", 11, "bold"), 
-    bg="#24283B", 
-    fg="#C0CAF5", 
-    bd=0, 
-    highlightthickness=1, 
-    highlightbackground="#383E56", 
-    highlightcolor="#9ECE6A", 
-    insertbackground="white", 
-    width=6, 
+    start_lf,
+    font=("Helvetica", 20, "bold"),
+    bg="#24283B",
+    fg="#C0CAF5",
+    bd=0,
+    highlightthickness=1,
+    highlightbackground="#383E56",
+    highlightcolor="#9ECE6A",
+    insertbackground="white",
+    width=4,
     justify="center"
 )
 start_sec_entry.insert(0, "0")
-start_sec_entry.grid(row=0, column=3, padx=5, pady=5)
+start_sec_entry.grid(row=0, column=3, padx=5, pady=5, ipady=6)
 
 # Bitiş Zamanı Kutusu
 end_lf = tk.LabelFrame(
@@ -356,41 +356,41 @@ end_lf = tk.LabelFrame(
 )
 end_lf.grid(row=0, column=1, padx=(10, 0), sticky="nsew")
 
-end_min_label = tk.Label(end_lf, text="Dakika:", font=("Helvetica", 10), bg="#1A1B26", fg="#A9B1D6")
+end_min_label = tk.Label(end_lf, text="Dakika:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
 end_min_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 end_min_entry = tk.Entry(
-    end_lf, 
-    font=("Helvetica", 11, "bold"), 
-    bg="#24283B", 
-    fg="#C0CAF5", 
-    bd=0, 
-    highlightthickness=1, 
-    highlightbackground="#383E56", 
-    highlightcolor="#F7768E", 
-    insertbackground="white", 
-    width=6, 
+    end_lf,
+    font=("Helvetica", 20, "bold"),
+    bg="#24283B",
+    fg="#C0CAF5",
+    bd=0,
+    highlightthickness=1,
+    highlightbackground="#383E56",
+    highlightcolor="#F7768E",
+    insertbackground="white",
+    width=4,
     justify="center"
 )
 end_min_entry.insert(0, "0")
-end_min_entry.grid(row=0, column=1, padx=5, pady=5)
+end_min_entry.grid(row=0, column=1, padx=5, pady=5, ipady=6)
 
-end_sec_label = tk.Label(end_lf, text="Saniye:", font=("Helvetica", 10), bg="#1A1B26", fg="#A9B1D6")
+end_sec_label = tk.Label(end_lf, text="Saniye:", font=("Helvetica", 12, "bold"), bg="#1A1B26", fg="#A9B1D6")
 end_sec_label.grid(row=0, column=2, padx=5, pady=5, sticky="w")
 end_sec_entry = tk.Entry(
-    end_lf, 
-    font=("Helvetica", 11, "bold"), 
-    bg="#24283B", 
-    fg="#C0CAF5", 
-    bd=0, 
-    highlightthickness=1, 
-    highlightbackground="#383E56", 
-    highlightcolor="#F7768E", 
-    insertbackground="white", 
-    width=6, 
+    end_lf,
+    font=("Helvetica", 20, "bold"),
+    bg="#24283B",
+    fg="#C0CAF5",
+    bd=0,
+    highlightthickness=1,
+    highlightbackground="#383E56",
+    highlightcolor="#F7768E",
+    insertbackground="white",
+    width=4,
     justify="center"
 )
 end_sec_entry.insert(0, "0")
-end_sec_entry.grid(row=0, column=3, padx=5, pady=5)
+end_sec_entry.grid(row=0, column=3, padx=5, pady=5, ipady=6)
 
 # Bilgilendirme İpucu
 info_label = tk.Label(
