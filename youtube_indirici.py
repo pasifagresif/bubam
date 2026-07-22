@@ -273,18 +273,57 @@ url_label = tk.Label(
 )
 url_label.pack(anchor="w", pady=(0, 5))
 
+url_input_row = tk.Frame(url_frame, bg="#1A1B26")
+url_input_row.pack(fill="x")
+url_input_row.columnconfigure(0, weight=1)
+
 url_entry = tk.Entry(
-    url_frame, 
-    font=("Helvetica", 12), 
-    bg="#24283B", 
-    fg="#C0CAF5", 
-    bd=0, 
-    highlightthickness=1, 
-    highlightbackground="#383E56", 
-    highlightcolor="#7AA2F7", 
+    url_input_row,
+    font=("Helvetica", 12),
+    bg="#24283B",
+    fg="#C0CAF5",
+    bd=0,
+    highlightthickness=1,
+    highlightbackground="#383E56",
+    highlightcolor="#7AA2F7",
     insertbackground="white"
 )
-url_entry.pack(fill="x", ipady=8)
+url_entry.grid(row=0, column=0, sticky="ew", ipady=8)
+
+def paste_link():
+    try:
+        clipboard_content = root.clipboard_get().strip()
+    except tk.TclError:
+        clipboard_content = ""
+    if not clipboard_content:
+        messagebox.showerror("Hata", "Panoda kopyalanmış bir link bulunamadı!\nÖnce YouTube'dan linki kopyalayın.")
+        return
+    url_entry.delete(0, "end")
+    url_entry.insert(0, clipboard_content)
+
+paste_btn = tk.Button(
+    url_input_row,
+    text="📋 YAPIŞTIR",
+    font=("Helvetica", 12, "bold"),
+    bg="#9ECE6A",
+    fg="#1A1B26",
+    activebackground="#B9F27C",
+    activeforeground="#1A1B26",
+    bd=0,
+    cursor="hand2",
+    padx=16,
+    command=paste_link
+)
+paste_btn.grid(row=0, column=1, sticky="ns", padx=(10, 0))
+
+def on_paste_enter(e):
+    paste_btn.config(bg="#B9F27C")
+
+def on_paste_leave(e):
+    paste_btn.config(bg="#9ECE6A")
+
+paste_btn.bind("<Enter>", on_paste_enter)
+paste_btn.bind("<Leave>", on_paste_leave)
 
 # Zaman Belirleme Çerçevesi (Yan yana iki kutu)
 time_frame = tk.Frame(root, bg="#1A1B26")
