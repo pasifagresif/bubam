@@ -1,0 +1,22 @@
+# Artık kullanılmıyor: yt-dlp pip paketinden geliyor (bkz. requirements.txt).
+# 90MB'lık vendored kaynak klasörünü repoya taşımaya gerek yok.
+yt-dlp/
+
+# İndirilen / kesilen videolar
+*.mp4
+*.mkv
+*.webm
+
+# Linux'a özel statik ffmpeg ikilileri (Windows build'i CI içinde kendi indirir)
+/ffmpeg
+/ffprobe
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# PyInstaller çıktıları
+build/
+dist/
+*.spec

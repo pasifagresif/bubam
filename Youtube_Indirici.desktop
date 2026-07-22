@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=YouTube İndirici & Kesici
+Comment=YouTube videolarını kolayca indirip kesmeye yarayan program
+Exec=python3 "/home/pasifagresif/Masaüstü/Babam için/youtube_indirici.py"
+Icon=video-x-generic
+Path=/home/pasifagresif/Masaüstü/Babam için
+Terminal=false
+Categories=Utility;
